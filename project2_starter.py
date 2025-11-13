@@ -79,7 +79,7 @@ class Character:
         # TODO: Implement basic attack
         # Damage should be based on self.strength
         # Use target.take_damage(damage) to apply damage
-        self_damage = self.strength
+        damage = (self.strength + random.randint(-2, 2))
         target.take_damage(self_damage)
         
     def take_damage(self, damage):
@@ -148,7 +148,7 @@ class Warrior(Player):
         """
         # TODO: Call super().__init__() with warrior-appropriate stats
         # Suggested stats: health=120, strength=15, magic=5
-        pass
+        super().__init__(name, "Warrior", 120, 15, 5)
         
     def attack(self, target):
         """
@@ -158,7 +158,9 @@ class Warrior(Player):
         # TODO: Implement warrior attack
         # Should do more damage than basic attack
         # Maybe strength + 5 bonus damage?
-        pass
+        damage = self.strength + 5 + random.randint(0, 5)
+        target.take_damage(damage)
+
         
     def power_strike(self, target):
         """
@@ -166,7 +168,8 @@ class Warrior(Player):
         """
         # TODO: Implement power strike
         # Should do significantly more damage than regular attack
-        pass
+        damage = self.strength + 10 + random.randint(2, 10)
+        target.take_damage(damage)
 
 class Mage(Player):
     """
