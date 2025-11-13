@@ -117,7 +117,13 @@ class Player(Character):
         # TODO: Call super().__init__() with the basic character info
         # TODO: Store the character_class (like "Warrior", "Mage", etc.)
         # TODO: Add any other player-specific attributes (level, experience, etc.)
-        pass
+        super().__init__(name, health, strength, magic)
+        self.name = name
+        self.character_class = character_class
+        self.health = health
+        self.strength = strength
+        self.magic = magic
+        return super().__init__(name, health, strength, magic)
         
     def display_stats(self):
         """
@@ -126,7 +132,8 @@ class Player(Character):
         """
         # TODO: Call the parent's display_stats method using super()
         # TODO: Then print additional player info like class and level
-        pass
+        super().display_stats()
+        print(f"Class: {self.character_class}")
 
 class Warrior(Player):
     """
