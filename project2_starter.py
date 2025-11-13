@@ -63,7 +63,10 @@ class Character:
         """Initialize basic character attributes"""
         # TODO: Set the character's name, health, strength, and magic
         # These should be stored as instance variables
-        pass
+        self.name = name
+        self.health = health
+        self.strength = strength
+        self.magic = magic
         
     def attack(self, target):
         """
@@ -76,7 +79,8 @@ class Character:
         # TODO: Implement basic attack
         # Damage should be based on self.strength
         # Use target.take_damage(damage) to apply damage
-        pass
+        self_damage = self.strength
+        target.take_damage(self_damage)
         
     def take_damage(self, damage):
         """
@@ -86,7 +90,9 @@ class Character:
         # TODO: Implement taking damage
         # Reduce self.health by damage amount
         # Make sure health doesn't go below 0
-        pass
+        self.health -= damage
+        if self.health < 0:
+            self.health = 0
         
     def display_stats(self):
         """
@@ -94,7 +100,8 @@ class Character:
         """
         # TODO: Print character's name, health, strength, and magic
         # Make it look nice with formatting
-        pass
+        self_stats = f"Name: {self.name}\nHealth: {self.health}\nStrength: {self.strength}\nMagic: {self.magic}"
+        print(self_stats)
 
 class Player(Character):
     """
