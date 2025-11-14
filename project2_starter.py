@@ -59,14 +59,15 @@ class Character:
     This is the top of our inheritance hierarchy.
     """
     
-    def __init__(self, name, health, strength, magic):
+    def __init__(self, name, health, strength, magic, agility):
         """Initialize basic character attributes"""
         # TODO: Set the character's name, health, strength, and magic
         # These should be stored as instance variables
         self.name = name
-        self.health = health
-        self.strength = strength
-        self.magic = magic
+        self.health = max(0, int(health))
+        self.strength = int(strength)
+        self.magic = int(magic)
+        self.agility = int(agility)
         
     def attack(self, target):
         """
@@ -79,8 +80,8 @@ class Character:
         # TODO: Implement basic attack
         # Damage should be based on self.strength
         # Use target.take_damage(damage) to apply damage
-        damage = (self.strength + random.randint(-5, 5))
-        target.take_damage(self_damage)
+        damage = max(0, self.strength + random.randint(-5, 5))
+        target.take_damage(damage)
         
     def take_damage(self, damage):
         """
@@ -90,6 +91,7 @@ class Character:
         # TODO: Implement taking damage
         # Reduce self.health by damage amount
         # Make sure health doesn't go below 0
+        damage = max(0, int(damage))
         self.health -= damage
         if self.health < 0:
             self.health = 0
@@ -100,8 +102,8 @@ class Character:
         """
         # TODO: Print character's name, health, strength, and magic
         # Make it look nice with formatting
-        self_stats = f"Name: {self.name}\nHealth: {self.health}\nStrength: {self.strength}\nMagic: {self.magic}"
-        print(self_stats)
+        stats = f"Name: {self.name}\nHealth: {self.health}\nStrength: {self.strength}\nMagic: {self.magic}"
+        print(stats)
 
 class Player(Character):
     """
@@ -118,12 +120,9 @@ class Player(Character):
         # TODO: Store the character_class (like "Warrior", "Mage", etc.)
         # TODO: Add any other player-specific attributes (level, experience, etc.)
         super().__init__(name, health, strength, magic, agility)
-        self.name = name
         self.character_class = character_class
-        self.health = health
-        self.strength = strength
-        self.magic = magic
-        self.agility = agility
+        self.level = 1
+        self.experience = 0
         return super().__init__(name, health, strength, magic, agility)
         
     def display_stats(self):
@@ -134,7 +133,7 @@ class Player(Character):
         # TODO: Call the parent's display_stats method using super()
         # TODO: Then print additional player info like class and level
         super().display_stats()
-        print(f"Class: {self.character_class}")
+        print(f"Class: {self.character_class}\nLevel: {self.level}\nEXP: {self.experience}\nAgility: {self.agility}")
 
 class Warrior(Player):
     """
@@ -159,7 +158,7 @@ class Warrior(Player):
         # TODO: Implement warrior attack
         # Should do more damage than basic attack
         # Maybe strength + 5 bonus damage?
-        damage = self.strength + 5 + random.randint(0, 5)
+        damage = max(0, self.strength + 5 + random.randint(0, 5))
         target.take_damage(damage)
 
         
@@ -169,7 +168,7 @@ class Warrior(Player):
         """
         # TODO: Implement power strike
         # Should do significantly more damage than regular attack
-        damage = self.strength + 10 + random.randint(2, 10)
+        damage = max(0, self.strength + 10 + random.randint(2, 10))
         target.take_damage(damage)
 
 class Mage(Player):
@@ -194,7 +193,7 @@ class Mage(Player):
         """
         # TODO: Implement mage attack
         # Should use self.magic for damage calculation instead of strength
-        damage = self.magic + random.randint(0, 3)
+        damage = max(0, self.magic + random.randint(0, 3))
         target.take_damage(damage)
         
     def fireball(self, target):
@@ -203,7 +202,7 @@ class Mage(Player):
         """
         # TODO: Implement fireball spell
         # Should do magic-based damage with bonus
-        damage = self.magic + 15 + random.randint(5, 25)
+        damage = max(0, self.magic + 15 + random.randint(5, 25))
         target.take_damage(damage)
 
 class Rogue(Player):
@@ -273,7 +272,7 @@ class Weapon:
         """
         # TODO: Store weapon name and damage bonus
         self.name = name
-        self.damage_bonus = damage_bonus
+        self.damage_bonus = int(damage_bonus)
         
     def display_info(self):
         """
@@ -306,7 +305,9 @@ if __name__ == "__main__":
     # rogue.display_stats()
     print("\n📊 Character Stats:")
     warrior.display_stats()
+    print()
     mage.display_stats()
+    print()
     rogue.display_stats()
     
     # TODO: Test polymorphism - same method call, different behavior
