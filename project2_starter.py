@@ -1,3 +1,5 @@
+import random
+
 """
 COMP 163 - Project 2: Character Abilities Showcase
 Name: [Khal Dogan]
@@ -59,7 +61,7 @@ class Character:
     This is the top of our inheritance hierarchy.
     """
     
-    def __init__(self, name, health, strength, magic, agility):
+    def __init__(self, name, health, strength, magic, agility = 10):
         """Initialize basic character attributes"""
         # TODO: Set the character's name, health, strength, and magic
         # These should be stored as instance variables
@@ -111,7 +113,7 @@ class Player(Character):
     Inherits from Character and adds player-specific features.
     """
     
-    def __init__(self, name, character_class, health, strength, magic, agility):
+    def __init__(self, name, character_class, health, strength, magic, agility=10):
         """
         Initialize a player character.
         Should call the parent constructor and add player-specific attributes.
@@ -123,7 +125,6 @@ class Player(Character):
         self.character_class = character_class
         self.level = 1
         self.experience = 0
-        return super().__init__(name, health, strength, magic, agility)
         
     def display_stats(self):
         """
@@ -241,6 +242,7 @@ class Rogue(Player):
         else:
             damage = self.agility + random.randint(0, 2)
             print("No Critical Hit.")
+        target.take_damage(damage)
         
     def sneak_attack(self, target):
         """
