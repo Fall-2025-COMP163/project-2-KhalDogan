@@ -203,7 +203,7 @@ class Mage(Player):
         """
         # TODO: Implement fireball spell
         # Should do magic-based damage with bonus
-        damage = max(0, self.magic + 15 + random.randint(5, 25))
+        damage = max(0, self.magic + 15 + random.randint(5, 15))
         target.take_damage(damage)
 
 class Rogue(Player):
