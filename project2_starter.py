@@ -1,4 +1,4 @@
-import random
+
 
 """
 COMP 163 - Project 2: Character Abilities Showcase
@@ -250,17 +250,16 @@ class Rogue(Player):
         """
         # TODO: Implement sneak attack
         # Should always do critical damage
+        crit_chance = random.randint(1, 11)
         if crit_chance >= 9:
+            damage = (((self.agility * 2) + random.randint(0, 5)) * 4)
             print("Extreme Critical Hit!")
-            damage = self.agility * 2 + random.randint(0, 10)
         elif crit_chance >= 6:
+            damage = ((self.agility + random.randint(0, 5)) * 3)
             print("Lucky Critical Hit!")
-            damage = self.agility + random.randint(5, 15)
-        else  :
+        elif crit_chance >= 1:
+            damage = ((self.agility + random.randint(0, 3)) * 2)
             print("Critical Hit!")
-            damage = self.agility + random.randint(0, 8)
-        
-        damage = max(10, min(damage, 50))
         target.take_damage(damage)
 
 class Weapon:
