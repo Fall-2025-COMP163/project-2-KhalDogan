@@ -231,13 +231,13 @@ class Rogue(Player):
         # Hint: use random.randint(1, 10) and if result <= 3, it's a crit
         crit_chance = random.randint(1, 10)
         if crit_chance >= 9:
-            damage = (self.agility + random.randint(0, 10)) * 2
+            damage = (self.agility * 2) + random.randint(0, 3)
             print("Extreme Critical Hit!")
         elif crit_chance >= 6:
-            damage = (self.agility + random.randint(1, 7)) * 2
+            damage = (self.agility*2) + random.randint(1, 7)
             print("Lucky Critical Hit!")
         elif crit_chance >= 3:
-            damage = (self.agility + random.randint(0, 3)) * 2
+            damage = (self.agility*2) + random.randint(0, 3)
             print("Critical Hit!")
         else:
             damage = self.agility + random.randint(0, 2)
@@ -252,13 +252,13 @@ class Rogue(Player):
         # Should always do critical damage
         crit_chance = random.randint(1, 11)
         if crit_chance >= 9:
-            damage = (((self.agility * 2) + random.randint(0, 5)) * 4)
+            damage = ((self.agility * 2)*2 + random.randint(0, 5)) 
             print("Extreme Critical Hit!")
         elif crit_chance >= 6:
-            damage = ((self.agility + random.randint(0, 5)) * 3)
+            damage = (self.agility*2) + random.randint(0, 5)
             print("Lucky Critical Hit!")
         elif crit_chance >= 1:
-            damage = ((self.agility + random.randint(0, 3)) * 2)
+            damage = ((self.agility*2) + random.randint(0, 3))
             print("Critical Hit!")
         target.take_damage(damage)
 
