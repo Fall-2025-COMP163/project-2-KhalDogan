@@ -87,18 +87,19 @@ class Character:
         Ensures health never drops below 0.
         """
         damage = max(0, int(damage))
-        self.health = max(0, self.health - damage)
+        self.health -= damage
+        if self.health < 0:
+            self.health = 0
         
     def display_stats(self):
         """Prints core character stats."""
-        stats = (
+                stats = (
             f"Name: {self.name}\n"
             f"Health: {self.health}\n"
             f"Strength: {self.strength}\n"
             f"Magic: {self.magic}"
         )
-        print(stats)
-
+            print(stats)
 class Player(Character):
     """
     Base class for all player-controlled characters.
@@ -126,6 +127,7 @@ class Player(Character):
 class Warrior(Player):
     """
     Warrior class: specializes in strong physical damage.
+    Inherits from Player.
     """
 
     def __init__(self, name):
@@ -151,6 +153,7 @@ class Warrior(Player):
 class Mage(Player):
     """
     Mage class: specializes in high magic damage.
+    Inherits from Player.
     """
 
     def __init__(self, name):
@@ -212,13 +215,13 @@ class Rogue(Player):
 
         if crit_roll >= 9:
             print("Extreme Critical Hit!")
-            damage = (self.agility * 4) + random.randint(1, 6)
+            damage = ((self.agility * 2)*2 + random.randint(0, 5)) 
         elif crit_roll >= 6:
             print("Lucky Critical Hit!")
-            damage = (self.agility * 2) + random.randint(1, 6)
+            damage = (self.agility*2) + random.randint(0, 5)
         else:
             print("Critical Hit!")
-            damage = (self.agility * 2) + random.randint(1, 4)
+            damage = ((self.agility*2) + random.randint(0, 3))
 
         target.take_damage(damage)
 
