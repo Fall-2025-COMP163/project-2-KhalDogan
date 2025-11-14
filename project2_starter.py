@@ -212,13 +212,13 @@ class Rogue(Player):
 
         if crit_roll >= 9:
             print("Extreme Critical Hit!")
-            damage = (self.agility * 4) + random.randint(0, 5)
+            damage = (self.agility * 4) + random.randint(1, 6)
         elif crit_roll >= 6:
             print("Lucky Critical Hit!")
-            damage = (self.agility * 2) + random.randint(0, 5)
+            damage = (self.agility * 2) + random.randint(1, 6)
         else:
             print("Critical Hit!")
-            damage = (self.agility * 2) + random.randint(0, 3)
+            damage = (self.agility * 2) + random.randint(1, 4)
 
         target.take_damage(damage)
 
