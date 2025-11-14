@@ -231,14 +231,14 @@ class Rogue(Player):
         # Hint: use random.randint(1, 10) and if result <= 3, it's a crit
         crit_chance = random.randint(1, 10)
         if crit_chance >= 9:
-            damage = (self.agility * 2) + random.randint(0, 5)
+            damage = (self.agility + random.randint(0, 10)) * 2
             print("Extreme Critical Hit!")
         elif crit_chance >= 6:
-            damage = self.agility + random.randint(0, 5)
+            damage = (self.agility + random.randint(1, 7)) * 2
             print("Lucky Critical Hit!")
         elif crit_chance >= 3:
-            damage = self.agility + random.randint(0, 3)
-            print("Normal Critical Hit!")
+            damage = (self.agility + random.randint(0, 3)) * 2
+            print("Critical Hit!")
         else:
             damage = self.agility + random.randint(0, 2)
             print("No Critical Hit.")
@@ -249,19 +249,16 @@ class Rogue(Player):
         """
         # TODO: Implement sneak attack
         # Should always do critical damage
-        crit_chance = random.randint(0, 11)
+        crit_chance = random.randint(1, 11)
         if crit_chance >= 9:
-            damage = (((self.agility * 2) + random.randint(0, 5)) * 5)
+            damage = (((self.agility * 2) + random.randint(0, 5)) * 4)
             print("Extreme Critical Hit!")
         elif crit_chance >= 6:
-            damage = ((self.agility + random.randint(0, 5)) * 4)
+            damage = ((self.agility + random.randint(0, 5)) * 3)
             print("Lucky Critical Hit!")
-        elif crit_chance >= 3:
-            damage = ((self.agility + random.randint(0, 3)) * 3)
-            print("Normal Critical Hit!")
-        else:
-            damage = ((self.agility + random.randint(0, 2)) * 2)
-            print("No Critical Hit.")
+        elif crit_chance >= 1:
+            damage = ((self.agility + random.randint(0, 3)) * 2)
+            print("Critical Hit!")
         target.take_damage(damage)
 
 class Weapon:
@@ -275,20 +272,7 @@ class Weapon:
         Create a weapon with a name and damage bonus.
         """
         # TODO: Store weapon name and damage bonus
-        Weapon_name = ""
-        damage_bonus = 0
-
-        if classmethod Warrior:
-            Weapon_name = "Sword"
-            damage_bonus = 10
-        elif classmethod Mage: 
-            Weapon_name = "Staff"
-            damage_bonus = 15
-        elif classmethod Rogue:
-            Weapon_name = "Dagger"
-            damage_bonus = 8
-        
-        self.name = Weapon_name
+        self.name = name
         self.damage_bonus = damage_bonus
         
     def display_info(self):
@@ -335,7 +319,6 @@ if __name__ == "__main__":
     #     dummy_target.health = 100  # Reset dummy health
     print("\n⚔️ Testing Polymorphism (same attack method, different behavior):")
     dummy_target = Character("Target Dummy", 100, 0, 0)
-    
     for character in [warrior, mage, rogue]:
         print(f"\n{character.name} attacks the dummy:")
         character.attack(dummy_target)
