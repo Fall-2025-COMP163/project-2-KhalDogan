@@ -1,4 +1,4 @@
-
+import random
 
 """
 COMP 163 - Project 2: Character Abilities Showcase
